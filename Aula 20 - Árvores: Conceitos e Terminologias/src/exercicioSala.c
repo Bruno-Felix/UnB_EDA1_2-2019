@@ -8,8 +8,8 @@ typedef struct TNo{
 }TNo;
 
 
-TNo * Constroi(TNo *Raiz);
-void printarArvore(TNo *no);
+TNo * Constroi(TNo *raiz);
+void printarArvore(TNo *raiz);
 
 
 int main (){
@@ -24,40 +24,41 @@ int main (){
 }
 
 
- TNo * Constroi(TNo *no){
+ TNo * Constroi(TNo *raiz){
 
     int dado;
     printf("Insira dado: \n");
     scanf("%d", &dado);
     
     if(dado != 0){
-        no = (TNo *) malloc (sizeof(TNo));
-        no->dado = dado;
+        raiz = (TNo *) malloc (sizeof(TNo));
+        raiz->dado = dado;
 
-        no->esquerda = Constroi(no->esquerda);
-        no->direita = Constroi(no->direita);
+        raiz->esquerda = Constroi(raiz->esquerda);
+        raiz->direita = Constroi(raiz->direita);
     }
     else{
-        no = NULL;
+        raiz = NULL;
     }
 
-    return no;
+    return raiz;
 }
 
-void printarArvore(TNo *no){
+void printarArvore(TNo *raiz){
     
-    printf(" %d ", no->dado);
+    printf(" %d ", raiz->dado);
     
-    if(no->esquerda != NULL){
+    if(raiz->esquerda != NULL){
 
-        printarArvore(no->esquerda);
+        printarArvore(raiz->esquerda);
     }
     else{
         printf(" . ");
     }
-    if(no->direita != NULL){
+    
+    if(raiz->direita != NULL){
 
-        printarArvore(no->direita);
+        printarArvore(raiz->direita);
     }
     else{
         printf(" . ");
