@@ -2,27 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-int pqtde = 0;
-
-char incluirCharNaPrimeiraPosicao(char *pvetcar, char letra, int pqtde);
-char excluirCharDoVetor(char *pvetcar, char letra, int pqtde);
+char incluirLetraNoVetor(char *pvetcar, char letra, int ptammax, int pqtde);
+char excluirLetraDoVetor(char *pvetcar, char letra, int ptammax, int pqtde);
+void printVetor(char *pvetcar, int ptammax);
 
 int main(){
 
     char *pvetcar;
     int ptammax;
+    int pqtde = 0;
 
     printf("Tamanho do vetor: ");
     scanf("%d", &ptammax);
-    pqtde = ptammax;
 
-    pvetcar = (char *) calloc(pqtde, sizeof(char));
+    pvetcar = (char *) calloc(ptammax, sizeof(char));
 
 
     while(1){
 
-        printf("\n\n------------------------------\n1 - incluir char na primeira posicao;\n");
-        printf("2 - Excluir char do vetor.\n");
+        printf("\n\n------------------------------\n");
+        printVetor(pvetcar, ptammax);
+        printf("\n1 - Incluir Letra no Vetor\n");
+        printf("2 - Excluir Letra do Vetor.\n");
 
         int escolha;
         printf("Escolha: ");
@@ -36,7 +37,7 @@ int main(){
             char letra;
             scanf("%c", &letra);
 
-            *pvetcar =  incluirCharNaPrimeiraPosicao(pvetcar, letra, pqtde);
+            *pvetcar =  incluirLetraNoVetor(pvetcar, letra, ptammax, pqtde);
         }
 
         else if(escolha == 2){
@@ -47,14 +48,14 @@ int main(){
             char letra;
             scanf("%c", &letra);
 
-            excluirCharDoVetor(pvetcar, letra, pqtde);
+            excluirLetraDoVetor(pvetcar, letra, ptammax, pqtde);
         }
 
         else if(escolha == 3){
             system("clear");
             printf("\n\nNúmero de elementos: \n");
 
-            printf("Tamanho: %d\n", pqtde);
+            printf("Tamanho: %d\n", ptammax);
         }
     }
 
@@ -63,17 +64,33 @@ int main(){
     return 0;
 }
 
-char incluirCharNaPrimeiraPosicao(char *pvetcar, char letra, int pqtde){
+char incluirLetraNoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
     
     int i = 0;
     int limite = 0;
-        
-    while (pvetcar[i]!='\0') {
+    int condicao = 0;
 
-        if((i+1) != (pqtde)){
-            if((letra >= 'a' && letra <= 'z') || (letra >= 'A' && letra <= 'Z')){
+    for(int j = 0; j < ptammax; j++){
+                
+        if(pvetcar[j] == 45){
             
-                printf("Letra '%c' na posicao pvetcar[%d]\n", pvetcar[i], i);
+            condicao = 1;
+
+            pvetcar[j] = letra;
+            break;
+        }
+    }    
+    while ((pvetcar[i]!='\0') && condicao == 0) {
+
+        if((i+1) != (ptammax)){
+            if((letra >= 48 && letra <= 57) ||
+               (letra >= 65 && letra <= 90) || 
+               (letra >= 97 && letra <= 122) || 
+               (letra == 45)){
+
+                pqtde++;
+            
+                /* printf("Letra '%c' na posicao pvetcar[%d]\n", pvetcar[i], i); */
                 i++;
             }
             else{
@@ -82,7 +99,7 @@ char incluirCharNaPrimeiraPosicao(char *pvetcar, char letra, int pqtde){
             }
         }
         else{
-            printf("Letra '%c' na posicao pvetcar[%d]\n", pvetcar[i], i);
+            /* printf("Letra '%c' na posicao pvetcar[%d]\n", pvetcar[i], i); */
 
             limite = 1;
             break;
@@ -105,34 +122,51 @@ char incluirCharNaPrimeiraPosicao(char *pvetcar, char letra, int pqtde){
     return *pvetcar;
 }
 
-char excluirCharDoVetor(char *pvetcar, char letra, int pqtde){
+char excluirLetraDoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
 
-    int excluido = 0;
+    int excluido = -1;
+    int existencia = 0;
 
-    for(int i = 0; i < pqtde; i++){
+    for(int i = 0; i < ptammax; i++){
+        
         if(pvetcar[i] == letra){
 
-            for (int j = i+1; j < pqtde; ++j){
-                pvetcar[j-1] = pvetcar[j];  
-            }
-        }
-    }
-    
-    for(int i = 0; i < pqtde; i++){
-        if(pvetcar[i] == letra){
             excluido++;
+            existencia++;
+            printf("Entrou\n");
+
+            pvetcar[i] = '-';
         }
     }
     
-    if(excluido == 0){
-
-        printf("Letra excluido ou inexistente\n");
-        pqtde--;
+    for(int i = 0; i < ptammax; i++){
+        
+        if(pvetcar[i] == letra){
+            excluido--;
+        }
     }
-    else{
+    
+    if(existencia == 0){
+
+        printf("Letra Inexistente\n");
+    }
+    else if(excluido == 0){
+
+        printf("Letra excluida\n");
+        /* ptammax--; */
+    }
+    else if(excluido == -2){
 
         printf("Letra não excluida\n");
     }
 
     return *pvetcar;
+}
+
+void printVetor(char *pvetcar, int ptammax){
+
+    printf("Vetor: ");
+    for(int i = 0; i < ptammax; i++){
+        printf("[%c]", pvetcar[i]);
+    }
 }
