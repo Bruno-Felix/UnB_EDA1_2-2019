@@ -31,6 +31,8 @@ int main(){
 
 void gerarVetor(float *vetorSensores){
 
+    srand(time(NULL));
+
     for(int i = 0; i < 300; i++){
     
         vetorSensores[i]=(rand()) % 1000;
