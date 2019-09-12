@@ -74,6 +74,7 @@ char incluirLetraNoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
     int condicao = 0;
 
     for(int j = 0; j < ptammax; j++){
+                
         if(pvetcar[j] == 45){
             
             condicao = 1;
@@ -82,7 +83,6 @@ char incluirLetraNoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
             break;
         }
     }    
-
     while ((pvetcar[i]!='\0') && condicao == 0) {
 
         if((i+1) != (ptammax)){
@@ -92,7 +92,7 @@ char incluirLetraNoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
                (letra == 45)){
 
                 pqtde++;
-            
+
                 i++;
             }
             else{
