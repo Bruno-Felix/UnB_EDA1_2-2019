@@ -30,6 +30,7 @@ int main(){
         scanf("%d", &escolha);
 
         if(escolha == 1){
+
             system("clear");
             printf("\n\nLetra a ser acrescentada: ");
             
@@ -41,6 +42,7 @@ int main(){
         }
 
         else if(escolha == 2){
+
             system("clear");
             printf("\n\nLetra a ser excluida: ");
             
@@ -52,6 +54,7 @@ int main(){
         }
 
         else if(escolha == 3){
+
             system("clear");
             printf("\n\nNúmero de elementos: \n");
 
@@ -71,7 +74,6 @@ char incluirLetraNoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
     int condicao = 0;
 
     for(int j = 0; j < ptammax; j++){
-                
         if(pvetcar[j] == 45){
             
             condicao = 1;
@@ -80,6 +82,7 @@ char incluirLetraNoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
             break;
         }
     }    
+
     while ((pvetcar[i]!='\0') && condicao == 0) {
 
         if((i+1) != (ptammax)){
@@ -90,7 +93,6 @@ char incluirLetraNoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
 
                 pqtde++;
             
-                /* printf("Letra '%c' na posicao pvetcar[%d]\n", pvetcar[i], i); */
                 i++;
             }
             else{
@@ -99,7 +101,6 @@ char incluirLetraNoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
             }
         }
         else{
-            /* printf("Letra '%c' na posicao pvetcar[%d]\n", pvetcar[i], i); */
 
             limite = 1;
             break;
@@ -142,6 +143,7 @@ char excluirLetraDoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
     for(int i = 0; i < ptammax; i++){
         
         if(pvetcar[i] == letra){
+            
             excluido--;
         }
     }
@@ -153,7 +155,6 @@ char excluirLetraDoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
     else if(excluido == 0){
 
         printf("Letra excluida\n");
-        /* ptammax--; */
     }
     else if(excluido == -2){
 
@@ -166,7 +167,9 @@ char excluirLetraDoVetor(char *pvetcar, char letra, int ptammax, int pqtde){
 void printVetor(char *pvetcar, int ptammax){
 
     printf("Vetor: ");
+
     for(int i = 0; i < ptammax; i++){
+    
         printf("[%c]", pvetcar[i]);
     }
 }
