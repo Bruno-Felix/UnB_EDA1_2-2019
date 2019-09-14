@@ -4,7 +4,7 @@ int main()
 {
 int y, *p, x; //Declaração de variáveis y, p(ponteiro) e x;
 y = 0; //Inserindo 0 na variável y;                                             y = 0
-p = &y; //Apontando o endereço de memória de y para ponteiro p(y);              p -> y = 0
+p = &y; //Apontando o ponteiro p para o endereço de memória de y;               p -> y = 0
 x = *p; //Inserindo em x o conteúdo do endereço apontado pelo ponteiro p(y);    x = p -> y | x = 0
 x = 4; //Inserindo 4 na variável x;                                             x = 4
 (*p)++; //Incrementando o conteúdo do endereço apontado pelo ponteiro p;        (p -> y)++ | y++ | y = 1
