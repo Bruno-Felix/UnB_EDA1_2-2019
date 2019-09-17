@@ -1,11 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 int main (){
 
-    double vfat[4];
-    double vetorPont;
-    for(int i = 0; i < 4; i++){
+    double auxVet[4];
 
-        scanf("%lf", &vfat[i]);
+    double *vFat = auxVet;
+
+    for(int i = 0; i < 4; i++){
+        printf("Insira o Faturamento da Empresa %d: ", i + 1);
+        scanf("%lf", &vFat[i]);
+    }
+
+    for(int j = 3; j >= 0; j--){
+
+        printf("Empresa %d: R$ %.2lf | Endereço de Memória: %X\n", j + 1, *(vFat + j), vFat + j);
     }
 
     return 0;
