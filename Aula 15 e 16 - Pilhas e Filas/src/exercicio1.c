@@ -1,99 +1,131 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct TPilha{
+typedef struct Pilha{
 
     int Topo;
     int Idade[5];
 
-} TPilha;
-
-typedef struct TElemento{
-    
-    int numIdade;
-
-} TElemento;
-
+}Pilha;
 
 void visualizarMenu();
-void menu(TPilha *Pilha);
+void menu(Pilha *Pilha);
 
-void Esvazia(TPilha *Pilha);
-bool Vazia(TPilha *Pilha);
-bool Empilha(TPilha *Pilha, TElemento *Elemento);
-TElemento *Desempilha(TPilha *Pilha);
-TElemento *Consulta(TPilha *Pilha);
-TElemento *novoElemento();
+void Esvazia(Pilha *Pilha);
+bool Vazia(Pilha *Pilha);
+void Empilha(Pilha *Pilha);
+void *Desempilha(Pilha *Pilha);
+void *Consulta(Pilha *Pilha);
+void *novoElemento();
+void printarPilha(Pilha *Pilha);
 
 
 int main(){
 
-    TPilha *Pilha = (TPilha *)calloc(1, sizeof(TPilha));
+    Pilha *PilhaDoPrograma = (Pilha *)calloc(1, sizeof(Pilha));
 
-    menu(Pilha);
+    menu(PilhaDoPrograma);
 
     return 0;
 }
 
 
-void Esvazia(TPilha *Pilha){
+void Esvazia(Pilha *PilhaDoPrograma){
 
-}
-bool Vazia(TPilha *Pilha){
+    for(int i = 0; i < 5; i++){
 
-}
-bool Empilha(TPilha *Pilha, TElemento *Elemento){
+        PilhaDoPrograma->Idade[i] = 0;
+    }
 
-}
-TElemento *Desempilha(TPilha *Pilha){
-
-}
-TElemento *Consulta(TPilha *Pilha){
-
+    menu(PilhaDoPrograma);
 }
 
-TElemento *novoElemento(){
+bool Vazia(Pilha *PilhaDoPrograma){
+    
+    int aux = 0;
+    for(int i = 0; i < 5; i++){
+        if(PilhaDoPrograma->Idade[i] == 0){
+            aux++;
+        }
+    }
+
+    if(aux == 5){
+
+        return 1;
+    }
+    else{
+        
+        return 0;
+    }
+}
+
+void Empilha(Pilha *PilhaDoPrograma){
+
+    for(int i = 0; i < 5; i++){
+        
+        if(PilhaDoPrograma->Idade[i] == 0){
+            
+            int auxIdade;
+            
+            printf("Insira nova Idade: ");
+            scanf("%d", &PilhaDoPrograma->Idade[i]);
+            break;
+        }
+    }
+
+    menu(PilhaDoPrograma);
+}
+
+void *Desempilha(Pilha *PilhaDoPrograma){
+printf("Lista está vazia.\n");
+}
+void *Consulta(Pilha *PilhaDoPrograma){
 
 }
 
-void menu(TPilha *Pilha){
+void menu(Pilha *PilhaDoPrograma){
 
-    visualizarMenu();
+    bool auxVazio;
 
-    TElemento *Elemento = (TElemento *)calloc(1, sizeof(TElemento));
-
-    int escolhaMenu;
-    scanf("%d", &escolhaMenu);
+    system("clear");
 
     while(1){
+
+        printarPilha(PilhaDoPrograma);
+        visualizarMenu();
+
+        int escolhaMenu = 0;
+        scanf("%d", &escolhaMenu);
+        
         switch (escolhaMenu){
             
         case 1:
 
-            Esvazia(Pilha);
+            /* Esvazia(PilhaDoPrograma); */
         
             break;
         case 2:
 
-            Vazia(Pilha);
-        
-            break;
+            auxVazio = Vazia(PilhaDoPrograma);
+
+            if(auxVazio == true){
+                printf("\nLista está vazia.\n");
+                break;
+            }
+            else{
+                printf("\nLista não está vazia.\n");
+                break;
+            }
+
         case 3: 
-
             
-            Elemento =  novoElemento();
-
-            Empilha(Pilha, Elemento);
-
+            Empilha(PilhaDoPrograma);
             break;
         case 4:
 
-            Elemento = Desempilha(Pilha);
-
             break;
         case 5:
-
-            Elemento = Consulta(Pilha);
 
             break;
         case 6:
@@ -111,10 +143,18 @@ void menu(TPilha *Pilha){
 void visualizarMenu(){
 
     printf("MENU:\n");
-
+    
     printf("1 - Esvaziar a pilha;\n");
     printf("2 - Verificar Pilha Vazia;\n");
     printf("3 - Empilhar Elemento;\n");
     printf("4 - Desempilhar Elemento;\n");
     printf("5 - Consultar Elemento.\n");
+}
+
+void printarPilha(Pilha *PilhaDoPrograma){
+    printf("\n\n----------------------\nVetor: [%d][%d][%d][%d][%d]\n----------------------\n\n", PilhaDoPrograma->Idade[0], 
+                                                                                                  PilhaDoPrograma->Idade[1], 
+                                                                                                  PilhaDoPrograma->Idade[2], 
+                                                                                                  PilhaDoPrograma->Idade[3], 
+                                                                                                  PilhaDoPrograma->Idade[4]);
 }
