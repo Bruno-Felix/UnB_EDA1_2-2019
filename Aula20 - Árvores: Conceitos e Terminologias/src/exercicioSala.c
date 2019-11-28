@@ -29,6 +29,7 @@ int main (){
     int dado;
     printf("Insira dado: \n");
     scanf("%d", &dado);
+    /* printf("dado: %d", dado); */
     
     if(dado != 0){
         raiz = (TNo *) malloc (sizeof(TNo));

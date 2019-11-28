@@ -2,31 +2,67 @@
 #include <stdlib.h>
 
 
-typedef struct exercicio1{
+typedef struct No{
     struct No *esquerda;
-    char letra;
+    char dado;
     struct No *direita;
 }No;
 
 
-No *criarArvore(No *raiz);
-
+No *constroiArvore(No *raiz);
+char lerProximo();
+void printarArvore(No *raiz);
 
 int main(){
 
-    No *raiz;
-    raiz = criarArvore(raiz);
+    No *raiz = NULL;
+    
+    raiz = constroiArvore(raiz);  
+    printarArvore(raiz);
 
     return 0;
 }
 
-No *criarArvore(No *raiz){
+No *constroiArvore(No *raiz){
+    
+    char novoCaractere;
+    novoCaractere = lerProximo();
+    printf("novoCaractere = %c\n", novoCaractere);
 
-    char stringArvore[16] = {};
-    scanf("%s", stringArvore);
-    printf("print: %s\n", stringArvore);
+    if(novoCaractere != '.'){
 
-    for(int i = 0; i == '\0' ; i++){
-        printf("%d %c\n", i, stringArvore[i]);
+        raiz = (No *) malloc (sizeof(No));
+
+        raiz->dado = novoCaractere;
+        
+        constroiArvore(raiz->esquerda);
+        //printf("\ndireita\n");
+        constroiArvore(raiz->direita);
+    }
+    else{
+
+        raiz = NULL;
+    }
+
+    return raiz;
+}
+
+char lerProximo(){
+
+    char proxChar;
+    printf("Insira char na arvore: \n");
+    
+    scanf(" %c", &proxChar);
+
+    return proxChar;
+}
+
+void printarArvore(No *raiz){
+    
+    if(raiz != NULL){
+
+        printf("%c ", raiz->dado);
+        printarArvore(raiz->esquerda);
+        printarArvore(raiz->direita);
     }
 }
